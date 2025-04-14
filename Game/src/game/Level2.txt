@@ -1,0 +1,220 @@
+###########
+#  .*** . #
+# * #*    #
+# *.  #   #
+# #     .*#
+# .. *#   .
+#   # *  *#
+# *  #  . #
+#*. *     #
+#   #* . *#
+###########
+
+			
+			Direction right = Direction.EAST;
+			Direction left = Direction.WEST;
+			Direction up = Direction.NORTH;
+			Direction down = Direction.SOUTH;
+			
+	        if (args.length < 1) {
+	            System.err.println("Error : No level file was provided in the argument.");
+	            System.err.println("Utilization : java -jar Game.jar path/to/LevelN.txt");
+	            return;
+	        }
+	        
+	        String filePath = args[0];
+	        
+			/*NIVEAU 1 */
+			Player player1 = new Player("Alice"); // Player is the type, player1 is the reference to the object & 'new Player(@param)' as a whole 
+												  // is the Object.
+			
+			Player player2 = new Player("Bob");
+			Player player3 = new Player("BOB");
+			player3.setScore(5500);
+			
+			
+			// joueur b est une instance de player2 (Bob)
+			Player b = (Player) player2;
+	
+	
+			//ArrayList<Player> players = new ArrayList<>();
+			
+			//Scanner scanner = new Scanner(System.in);
+			
+			
+			
+			/*int x = 100;
+			
+			for (int i = 0; i < 10; i++) { // for loop to add 100, 200, 300,... till 1000 pts to the player one's score 
+				player1.addedScore(x);
+				x += 100;
+			}*/
+			System.out.println(player1.getName() + "'s score is : " + player1.getScore() + " pts"); //prints the name of the 1st player with it's score
+	 		
+			
+			
+			
+			
+			
+			System.out.println("GAME START!");
+			
+			Level newLevel = new Level(3,4);
+			Player newPlayer = new Player("Mark");
+			newLevel.spawnPlayer(newPlayer, 1, 1);
+			newLevel.setWallsAroundGrid();			// we set the wall for it 
+			System.out.println(newPlayer.toString());
+			System.out.println(newLevel);
+
+			newLevel.movePlayer(right);
+			newLevel.movePlayer(left);
+			newLevel.movePlayer(right);
+			
+			Level level4 = new Level(6,6);
+			Player player4 = new Player("peter");
+			
+			level4.spawnPlayer(player4, 1, 1);
+			level4.setWallsAroundGrid();			// we set the wall for it 
+			System.out.println(player4.toString());
+			System.out.println(level4);
+
+			level4.movePlayer(right);
+			level4.movePlayer(left);
+			level4.movePlayer(right);
+			level4.movePlayer(down);
+			level4.movePlayer(down);
+			level4.movePlayer(up);
+			level4.movePlayer(up);
+			level4.movePlayer(up);
+			level4.movePlayer(up);
+			level4.setSpace(2, 0);
+			level4.setSpace(1, 0);
+			level4.setSpace(0, 0);
+			level4.setSpace(1,5);
+			System.out.println(level4);
+			level4.movePlayer(left);
+			level4.movePlayer(left);
+			level4.movePlayer(right);
+			level4.movePlayer(right);
+			level4.movePlayer(right);
+			level4.movePlayer(right);
+			level4.movePlayer(right);
+			level4.movePlayer(right);
+			level4.movePlayer(right);
+			level4.movePlayer(down);
+			level4.movePlayer(right);
+			level4.setCoin(1,1);
+			level4.setTrap(1,2);
+			level4.setTrap(1,3);
+			level4.setTrap(2,4);
+			level4.setTrap(0,0);
+			level4.movePlayer(left);
+		
+			System.out.println();
+			Scanner scanner = new Scanner(System.in);
+			boolean running = true;
+
+			Direction direction = null;
+			System.out.println("Real player interactions ! ");
+			while(running) {
+				System.out.println("Which direction would you like to move ? (up, down, left, right) type 'stop' to stop:");
+				String playerChoice = scanner.nextLine();
+				switch(playerChoice.toLowerCase()) {
+					case "left":
+						direction = Direction.WEST;
+						break;
+					case "right":
+						direction = Direction.EAST;
+						break;
+					case "up":
+						direction = Direction.NORTH;
+						break;
+					case "down":
+						direction = Direction.SOUTH;
+						break;
+					case "stop":
+						System.out.println("GAME TERMINATED!");
+						System.out.println("THANK YOU FOR PLAYING THE GAME !");
+						running = false;
+						break;
+					default:
+						System.out.println("Invalid input please enter a valid direction (up, down, left, right) type 'stop' to stop: ");
+						continue;
+				}
+				
+				if(direction != null) {
+					level4.movePlayer(direction);
+				}
+				if(level4.allCoinsCollected()) {
+					break;
+				}
+				if(level4.allLivesLost()) {
+					break;
+				}
+			}
+			
+			
+			System.out.println("Game reading first ! ");
+			
+			try {
+				System.out.println("Attempting to load level from: " + filePath);
+				//Level newestLevel = new Level("C:\\Users\\morko\\eclipse-workspace\\Game\\src\\Level1.txt");
+				Level level = new Level(filePath);
+				Player player = new Player("New Player");
+				level.spawnPlayer(player, 1, 1);
+				//System.out.print(level);
+				running = true;
+				while(running) {
+					System.out.println("Which direction would you like to move ? (up, down, left, right) type 'stop' to stop:");
+					String playerChoice = scanner.nextLine();
+					switch(playerChoice.toLowerCase()) {
+						case "left":
+							direction = Direction.WEST;
+							break;
+						case "right":
+							direction = Direction.EAST;
+							break;
+						case "up":
+							direction = Direction.NORTH;
+							break;
+						case "down":
+							direction = Direction.SOUTH;
+							break;
+						case "stop":
+							System.out.println("GAME TERMINATED!");
+							System.out.println("THANK YOU FOR PLAYING THE GAME !");
+							running = false;
+							break;
+						default:
+							System.out.println("Invalid input please enter a valid direction (up, down, left, right) type 'stop' to stop: ");
+							continue;
+					}
+					
+					if(direction != null) {
+						level.movePlayer(direction);
+					}
+					
+					if(level.allCoinsCollected()) {
+						return;
+					}
+					
+					if(level.allLivesLost()) {
+						return;
+					}
+				}
+			}
+			catch (FileNotFoundException e){
+				System.out.flush();
+				System.err.println("Error: The level file was not found. Check the file path again please.");
+			}
+			catch (IOException e) {
+				System.out.flush();
+				System.err.println("Error: An I/O error occured while reading the level's file: " + e.getMessage());
+			}
+			catch (Exception e) {
+				System.out.flush();
+				System.err.println("Error: An unexpected error occured: " + e.getMessage());
+			}
+			
+			//System.out.println("Still works after error");
+			
+		}

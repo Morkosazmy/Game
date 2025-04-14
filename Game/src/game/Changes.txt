@@ -1,0 +1,40 @@
+Changes.txt
+
+1. Created the readme.txt (notice) file and the changes.txt (log) file.
+2. Changed the String[][] into a char[][] which makes it a grid of characters.
+3. Modified the code so that it shows the position of the player and his score before showing the grid itself.
+4. equals Documentation reviewed and modified.
+5. Completed the missing @param in the level constructor.
+
+28/03/2025
+
+1. Added enum for Directions (North, West, EAST, SOUTH) and made the palyer move in these directions
+2. Added some of the missing documentations.
+
+30/03/2025
+
+1. Modified the movePlayer method
+2. Player can no longer go through the walls.
+
+31/03/2025
+
+1. Added the movePlayer method that allows the player to move in the grid in the 4 cardinal directions.
+
+02/04/2025
+
+1. Added the realPlayerMove method that allows us to take the player's input to move the player in the chosen direction and it allows the player to exit the game as well
+
+05/04/2025
+
+1. Removed the setLevel method
+2. Added setWall method
+3. Added setWallAroundGrid method
+4. Fixed some of the documentation
+5. Removed realPlayerMove method
+6. Added a while loop to ask for real player's movement input that uses movePlayer method instead of the realPlayerMove method
+
+08/04/2025
+
+1. Changed the main class so that it can work from a terminal by giving the level's path as an argument
+2. The game's been exported and a jar file was created.
+3. Modified some of the System.Out.Println() in the while loop as well.
